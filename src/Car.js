@@ -51,7 +51,7 @@ export function Car() {
     });
   }, [gltf]);
 
-  console.log(gltf.scene.children[0].children[0]);
+  // console.log(gltf.scene.children[0].children[0]);
   // useFrame((state, delta) => {
   //   let t = state.clock.getElapsedTime();
   //   let group = gltf.scene.children[0].children[0];

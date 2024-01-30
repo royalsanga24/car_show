@@ -4,6 +4,7 @@ import "./style.css";
 import {
   CubeCamera,
   Environment,
+  Html,
   OrbitControls,
   PerspectiveCamera,
 } from "@react-three/drei";
@@ -18,6 +19,7 @@ import {
 } from "@react-three/postprocessing";
 import { BlendFunction } from "postprocessing";
 import { FloatingGrid } from "./FloatingGrid";
+import { Menu } from "react-float-menu";
 
 function changeCar() {
   console.log("Change Car");
@@ -31,14 +33,45 @@ function CarShow() {
       <PerspectiveCamera makeDefault fov={50} position={[3, 2, 5]} />
 
       <color args={[0, 0, 0]} attach="background" />
+      <Menu
+        dimension={40}
+        items={[
+          { name: "File" },
+          {
+            children: [
+              { children: [{ name: "Cut 1" }, { name: "Cut 2" }], name: "Cut" },
+              { name: "Select All" },
+            ],
+            name: "Edit",
+          },
+          { name: "Add" },
+          {
+            children: [
+              { name: "Copy from clipboard" },
+              { name: "Copy selection" },
+            ],
+            name: "Copy",
+          },
+          { name: "Save" },
+          { name: "Logout" },
+        ]}
+        shape="square"
+        startPosition="top left"
+        width={250}
+        onSelect={(val) => console.log(val)}
+      >
+        {/* <PlusIcon /> */}
+      </Menu>
 
-      <CubeCamera resolution={256} frames={Infinity}>
+      <CubeCamera
+        resolution={256}
+        frames={Infinity}
+        onClick={() => changeCar()}
+      >
         {(texture) => (
           <>
             <Environment map={texture} />
-            <div onClick={() => console.log("Clicked")}>
-              <Car />
-            </div>
+            <Car />
           </>
         )}
       </CubeCamera>
