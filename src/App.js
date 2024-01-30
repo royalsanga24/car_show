@@ -19,6 +19,10 @@ import {
 import { BlendFunction } from "postprocessing";
 import { FloatingGrid } from "./FloatingGrid";
 
+function changeCar() {
+  console.log("Change Car");
+}
+
 function CarShow() {
   return (
     <>
@@ -32,7 +36,9 @@ function CarShow() {
         {(texture) => (
           <>
             <Environment map={texture} />
-            <Car />
+            <div onClick={() => console.log("Clicked")}>
+              <Car />
+            </div>
           </>
         )}
       </CubeCamera>
