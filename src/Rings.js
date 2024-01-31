@@ -9,6 +9,7 @@ export function Rings() {
     let elapsed = state.clock.getElapsedTime();
     for (let i = 0; i < itemsRef.current.length; i++) {
       let mesh = itemsRef.current[i];
+      // console.log(Object.keys(mesh.ringGeometry));
       //   let z = (i - 7) * 3.5;
       let z = (i - 7) * 3.5 + ((elapsed * 0.4) % 3.5) * 2;
       mesh.position.set(0, 0, -z);
@@ -22,7 +23,7 @@ export function Rings() {
       }
       colorScale *= 0.5;
 
-      if (i % 2 == 1) {
+      if (i % 2 === 1) {
         mesh.material.emissive = new Color(6, 0.15, 0.7).multiplyScalar(
           colorScale
         );
@@ -44,7 +45,7 @@ export function Rings() {
           key={i}
           ref={(el) => (itemsRef.current[i] = el)}
         >
-          <torusGeometry args={[3.35, 0.05, 16, 100]} />
+          <ringGeometry args={[3.8, 4, 5, 0]} />
           <meshStandardMaterial emissive={[4, 0.1, 0.4]} color={[0, 0, 0]} />
         </mesh>
       ))}

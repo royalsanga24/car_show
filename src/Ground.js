@@ -1,11 +1,11 @@
 import { MeshReflectorMaterial } from "@react-three/drei";
-import { useFrame, useLoader } from "@react-three/fiber";
+import { useLoader } from "@react-three/fiber";
 import { useEffect } from "react";
 import { LinearEncoding, RepeatWrapping, TextureLoader } from "three";
 
 export function Ground() {
   const [roughness, normal] = useLoader(TextureLoader, [
-    process.env.PUBLIC_URL + "textures/terrain-roughness.jpg",
+    process.env.PUBLIC_URL + "textures/bg.avif",
     process.env.PUBLIC_URL + "textures/terrain-normal.jpg",
   ]);
 
@@ -34,7 +34,7 @@ export function Ground() {
         normalScale={[0.15, 0.15]}
         roughnessMap={roughness}
         dithering={true}
-        color={[0.015, 0.015, 0.015]}
+        color={[1, 1, 1]}
         roughness={0.7}
         blur={[1000, 400]} // Blur ground reflections (width, heigt), 0 skips blur
         mixBlur={30} // How much blur mixes with surface roughness (default = 1)

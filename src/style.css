@@ -1,11 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Karla:wght@400;500;700&family=Poppins:wght@400;500&family=Sixtyfour&display=swap');
+
 html, body, #root, canvas {
     width: 100%;
     height: 100%;
     margin: 0;
     overflow: hidden;
+    font-family: 'Sixtyfour', sans-serif;
 }
 
-menuAppear{
-    width: 300px;
-    height: 300px;
+.car-menu-button{
+    position: absolute;
+    max-width: 250px;
+    height: 50px;
+    font-size: medium;
+    right: 0;
+    margin-right: 20px;
+    top: 0;
+    margin-top: 20px;
+    background-color: rgb(20, 31, 67);
+    z-index: 1;
+    color: rgb(222, 227, 202);
+    border-radius: 20px;
+    transition: 0.5s;
+}
+
+.car-menu-button h1{
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 3px;
+    font-weight: 1px;
+    font-size: 20px;
+    align-self: center;
+}
+
+.car-menu-button:hover{
+    background-color: rgb(59, 70, 109);
+    cursor: pointer;
+}
+
+.menuu{
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 250px;
+    height: 110px;
+    background-color: rgb(20, 31, 67);
+    border-radius: 20px;
+}
+
+.menuu select{
+    background-color: rgb(106, 142, 174);
+    width: 150px;
+    border-radius: 10px;
 }

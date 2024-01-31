@@ -1,11 +1,11 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useState, useRef } from "react";
 import { Canvas } from "@react-three/fiber";
 import "./style.css";
 import {
   CubeCamera,
   Environment,
-  Html,
   OrbitControls,
+  Html,
   PerspectiveCamera,
 } from "@react-three/drei";
 import { Ground } from "./Ground";
@@ -19,13 +19,12 @@ import {
 } from "@react-three/postprocessing";
 import { BlendFunction } from "postprocessing";
 import { FloatingGrid } from "./FloatingGrid";
-import { Menu } from "react-float-menu";
+import { Menu } from "./ChangeCarMenu";
+import { cars } from "./CarInfo";
 
-function changeCar() {
-  console.log("Change Car");
-}
-
-function CarShow() {
+function CarShow(props) {
+  // const cc = useRef(cars.car1);
+  // console.log(selectedCar);
   return (
     <>
       <OrbitControls target={[0, 0.35, 0]} maxPolarAngle={1.45} />
@@ -33,45 +32,12 @@ function CarShow() {
       <PerspectiveCamera makeDefault fov={50} position={[3, 2, 5]} />
 
       <color args={[0, 0, 0]} attach="background" />
-      <Menu
-        dimension={40}
-        items={[
-          { name: "File" },
-          {
-            children: [
-              { children: [{ name: "Cut 1" }, { name: "Cut 2" }], name: "Cut" },
-              { name: "Select All" },
-            ],
-            name: "Edit",
-          },
-          { name: "Add" },
-          {
-            children: [
-              { name: "Copy from clipboard" },
-              { name: "Copy selection" },
-            ],
-            name: "Copy",
-          },
-          { name: "Save" },
-          { name: "Logout" },
-        ]}
-        shape="square"
-        startPosition="top left"
-        width={250}
-        onSelect={(val) => console.log(val)}
-      >
-        {/* <PlusIcon /> */}
-      </Menu>
 
-      <CubeCamera
-        resolution={256}
-        frames={Infinity}
-        onClick={() => changeCar()}
-      >
+      <CubeCamera resolution={256} frames={Infinity}>
         {(texture) => (
           <>
             <Environment map={texture} />
-            <Car />
+            <Car selectedCar={props.selectedCar} cars={props.cars} />
           </>
         )}
       </CubeCamera>
@@ -82,7 +48,7 @@ function CarShow() {
 
       <spotLight
         color={[1, 0.25, 0.7]}
-        intensity={155.5}
+        intensity={105.5}
         angle={0.6}
         penumbra={0.5}
         position={[7, 5, 0]}
@@ -92,7 +58,7 @@ function CarShow() {
 
       <spotLight
         color={[0.14, 0.5, 1]}
-        intensity={156}
+        intensity={106}
         angle={0.6}
         penumbra={0.5}
         position={[-7, 5, 0]}
@@ -122,10 +88,30 @@ function CarShow() {
 }
 
 function App() {
+  const [menuVisible, setMenuVisible] = useState(false);
+  const [selectedCar, setSelectedCar] = useState(cars.car1);
+
   return (
     <Suspense fallback={null}>
+      <div className="car-menu-button">
+        <div
+          onClick={() => {
+            setMenuVisible(!menuVisible);
+            console.log(menuVisible);
+          }}
+        >
+          <h1>CHANGE CAR</h1>
+        </div>
+        {menuVisible && (
+          <Menu
+            selectedCar={selectedCar}
+            setSelectedCar={setSelectedCar}
+            cars={cars}
+          />
+        )}
+      </div>
       <Canvas shadows>
-        <CarShow />
+        <CarShow selectedCar={selectedCar} cars={cars} />
       </Canvas>
     </Suspense>
   );

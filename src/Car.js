@@ -3,29 +3,33 @@ import { useFrame, useLoader } from "@react-three/fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { Mesh } from "three";
 
-export function Car() {
-  const cars = {
-    car1: [
-      "models/car/car1/scene.gltf",
-      [0.005, 0.005, 0.005],
-      [0, -0.035, 0],
-      [0, 0, 0],
-    ],
-    car2: [
-      "models/car/car2/scene.gltf",
-      [0.8, 0.8, 0.8],
-      [0, -0.035, 0],
-      [0, 89.5, 0],
-    ],
-    car3: [
-      "models/car/car3/scene.gltf",
-      [0.3, 0.3, 0.3],
-      [0, -0.3, 0],
-      [0, 0, 0],
-    ],
-    car4: ["models/car/car4/scene.gltf", [2, 2, 2], [0, 0.7, 0], [0, 355, 0]],
-  };
-  const selectedModel = cars.car3;
+export function Car(props) {
+  // const cars = {
+  //   car1: [
+  //     "models/car/car1/scene.gltf",
+  //     [0.005, 0.005, 0.005],
+  //     [0, -0.035, 0],
+  //     [0, 0, 0],
+  //   ],
+  //   car2: [
+  //     "models/car/car2/scene.gltf",
+  //     [0.8, 0.8, 0.8],
+  //     [0, -0.035, 0],
+  //     [0, 89.5, 0],
+  //   ],
+  //   car3: [
+  //     "models/car/car3/scene.gltf",
+  //     [0.3, 0.3, 0.3],
+  //     [0, -0.3, 0],
+  //     [0, 0, 0],
+  //   ],
+  //   car4: ["models/car/car4/scene.gltf", [2, 2, 2], [0, 0.7, 0], [0, 355, 0]],
+  // };
+  // console.log(props.selectedCar);
+  const selectedModel = props.selectedCar;
+  useEffect(() => {
+    const selectedModel = props.selectedCar;
+  }, props.selectedCar);
   const gltf = useLoader(GLTFLoader, process.env.PUBLIC_URL + selectedModel[0]);
 
   useEffect(() => {
